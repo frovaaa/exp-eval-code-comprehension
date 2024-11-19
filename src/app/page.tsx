@@ -20,7 +20,7 @@ export default function Home() {
       </Typography>
       <Box mt={2}>
         <Button variant='contained' color='primary' href='/study'>
-          Start Study
+          Start Study (BLA BLA BLA)
         </Button>
       </Box>
     </Container>

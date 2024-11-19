@@ -1,0 +1,9 @@
+echo "Updating parent repository with submodule changes..."
+
+cd ../../
+
+git add experiment2/code-comprehension
+
+git commit -m 'Updated submodule: experiment2/code-comprehension to latest commit'
+
+git push origin main || echo "Parent repository push failed!"

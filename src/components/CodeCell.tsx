@@ -11,22 +11,38 @@ interface CodeCellProps {
   practice?: boolean;
 }
 
+interface Result {
+  elapsedTime: number;
+  isCorrect: boolean;
+}
+
 export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showIdentifier, setShowIdentifier] = useState(true);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [results, setResults] = useState<Result[]>([]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowIdentifier(false);
+      setStartTime(Date.now()); // Capture the start time when the identifier is hidden
     }, 1500);
 
     return () => clearTimeout(timer);
   }, [currentQuestionIndex]);
 
   const handleDistractorClick = (distractor: string) => {
+    const endTime = Date.now();
+    const elapsedTime = startTime ? endTime - startTime : 0;
+    const isCorrect = distractor === questions[currentQuestionIndex].identifier;
     console.log('Clicked distractor:', distractor);
-    // Execute your logic here
+    console.log('Elapsed time (ms):', elapsedTime);
+    console.log('Elapsed time (s):', elapsedTime / 1000);
+    console.log('Is correct:', isCorrect);
+
+    // Save the result for the current question
+    setResults((prevResults) => [...prevResults, { elapsedTime, isCorrect }]);
 
     // Disable buttons to prevent spamming
     setButtonsDisabled(true);
@@ -36,10 +52,12 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
       setShowIdentifier(true);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setButtonsDisabled(false); // Re-enable buttons for the next question
+      setStartTime(null); // Reset start time for the next question
     }, 1000); // 1 second break between questions
   };
 
   if (currentQuestionIndex >= questions.length) {
+    console.log('All results:', results);
     return (
       <>
         {practice ? (

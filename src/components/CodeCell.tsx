@@ -11,7 +11,7 @@ interface CodeCellProps {
   practice?: boolean;
 }
 
-export const CodeCell = ({ questions, practice }: CodeCellProps) => {
+export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showIdentifier, setShowIdentifier] = useState(true);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);

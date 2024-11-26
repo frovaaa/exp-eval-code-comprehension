@@ -14,10 +14,10 @@ export default function RunPage() {
   return (
     <Container maxWidth='md' sx={{ mt: '2rem' }}>
       <Typography variant='h4' sx={{ textAlign: 'center' }}>
-        Real Round
+        Main Task
       </Typography>
       <Divider />
-      <CodeCell questions={allQuestions} />
+      <CodeCell questions={allQuestions} practice={false} />
     </Container>
   );
 }

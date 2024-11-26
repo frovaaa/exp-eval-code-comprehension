@@ -24,7 +24,7 @@ export default function PracticePage() {
         Practice Round
       </Typography>
       <Divider />
-      <CodeCell questions={codeCellQuestions} />
+      <CodeCell questions={codeCellQuestions} practice={true} />
     </Container>
   );
 }

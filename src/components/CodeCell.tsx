@@ -34,10 +34,6 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
     const endTime = Date.now();
     const elapsedTime = startTime ? endTime - startTime : 0;
     const isCorrect = distractor === questions[currentQuestionIndex].identifier;
-    console.log('Clicked distractor:', distractor);
-    console.log('Elapsed time (ms):', elapsedTime);
-    console.log('Elapsed time (s):', elapsedTime / 1000);
-    console.log('Is correct:', isCorrect);
 
     // Save the result for the current question
     setResults((prevResults) => [
@@ -67,8 +63,6 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
       !resultsSaved &&
       !practice
     ) {
-      console.log('All results:', results);
-
       // Get the demographics from the session storage
       const age = sessionStorage.getItem('code-comprehension-age');
       const csBackground = sessionStorage.getItem(

@@ -5,15 +5,12 @@ import { Box, Button, Typography } from '@mui/material';
 import { question } from '@/types/question';
 import Link from 'next/link';
 import Confetti from 'react-confetti';
+import { saveResultsToDatabase } from '@/lib/saveResults';
+import { result, demographics } from '@/types/result';
 
 interface CodeCellProps {
   questions: question[];
   practice?: boolean;
-}
-
-interface Result {
-  elapsedTime: number;
-  isCorrect: boolean;
 }
 
 export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
@@ -21,7 +18,8 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
   const [showIdentifier, setShowIdentifier] = useState(true);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
-  const [results, setResults] = useState<Result[]>([]);
+  const [results, setResults] = useState<result[]>([]);
+  const [resultsSaved, setResultsSaved] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -42,7 +40,14 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
     console.log('Is correct:', isCorrect);
 
     // Save the result for the current question
-    setResults((prevResults) => [...prevResults, { elapsedTime, isCorrect }]);
+    setResults((prevResults) => [
+      ...prevResults,
+      {
+        elapsedTime,
+        isCorrect,
+        questionId: questions[currentQuestionIndex].id,
+      },
+    ]);
 
     // Disable buttons to prevent spamming
     setButtonsDisabled(true);
@@ -56,8 +61,30 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
     }, 1000); // 1 second break between questions
   };
 
+  useEffect(() => {
+    if (
+      currentQuestionIndex >= questions.length &&
+      !resultsSaved &&
+      !practice
+    ) {
+      console.log('All results:', results);
+
+      // Get the demographics from the session storage
+      const age = sessionStorage.getItem('code-comprehension-age');
+      const csBackground = sessionStorage.getItem(
+        'code-comprehension-csBackground'
+      );
+      const demographics: demographics = {
+        age: age ? parseInt(age) : 0,
+        csBackground: csBackground === 'yes',
+      };
+
+      saveResultsToDatabase(results, demographics);
+      setResultsSaved(true); // Mark results as saved
+    }
+  }, [currentQuestionIndex, questions.length, results, resultsSaved, practice]);
+
   if (currentQuestionIndex >= questions.length) {
-    console.log('All results:', results);
     return (
       <>
         {practice ? (

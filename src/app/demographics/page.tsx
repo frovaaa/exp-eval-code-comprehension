@@ -21,9 +21,9 @@ export default function Home() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Execute your logic here
-    console.log('Age:', age);
-    console.log('CS Background:', csBackground);
+    // Save the data in session storage
+    sessionStorage.setItem('code-comprehension-age', age);
+    sessionStorage.setItem('code-comprehension-csBackground', csBackground);
     // Navigate to the /practice page
     router.push('/practice');
   };

@@ -125,18 +125,18 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
       ) : (
         <Box>
           <Box>
-            {fixedCurrentQuestion.distractors.map((option) => (
-              <Button
-                key={option}
-                variant='contained'
-                color='secondary'
-                onClick={() => handleDistractorClick(option)}
-                sx={{ m: 1, textTransform: 'none' }}
-                disabled={buttonsDisabled}
-              >
-                {option}
-              </Button>
-            ))}
+            {!buttonsDisabled &&
+              fixedCurrentQuestion.distractors.map((option) => (
+                <Button
+                  key={option}
+                  variant='contained'
+                  color='secondary'
+                  onClick={() => handleDistractorClick(option)}
+                  sx={{ m: 1, textTransform: 'none' }}
+                >
+                  {option}
+                </Button>
+              ))}
           </Box>
         </Box>
       )}

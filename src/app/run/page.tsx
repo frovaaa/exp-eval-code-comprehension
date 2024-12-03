@@ -1,5 +1,5 @@
 import { CodeCell } from '@/components/CodeCell';
-import { Container, Divider, Typography } from '@mui/material';
+import { Container, Divider } from '@mui/material';
 import { questions } from '@/utils/questions';
 import { question } from '@/types/question';
 
@@ -13,9 +13,9 @@ export default function RunPage() {
 
   return (
     <Container maxWidth='md' sx={{ mt: '2rem' }}>
-      <Typography variant='h4' sx={{ textAlign: 'center' }}>
+      {/* <Typography variant='h4' sx={{ textAlign: 'center' }}>
         Main Task
-      </Typography>
+      </Typography> */}
       <Divider />
       <CodeCell questions={allQuestions} practice={false} />
     </Container>

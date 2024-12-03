@@ -15,19 +15,13 @@ interface CodeCellProps {
 
 export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [showIdentifier, setShowIdentifier] = useState(true);
   const [buttonsDisabled, setButtonsDisabled] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
   const [results, setResults] = useState<result[]>([]);
   const [resultsSaved, setResultsSaved] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowIdentifier(false);
-      setStartTime(Date.now()); // Capture the start time when the identifier is hidden
-    }, 1500);
-
-    return () => clearTimeout(timer);
+    setStartTime(Date.now()); // Capture the start time when the component mounts
   }, [currentQuestionIndex]);
 
   const handleDistractorClick = (distractor: string) => {
@@ -45,12 +39,11 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
       },
     ]);
 
-    // Disable buttons to prevent spamming
+    // Hide buttons to prevent spamming
     setButtonsDisabled(true);
 
     // Move to the next question after a brief break
     setTimeout(() => {
-      setShowIdentifier(true);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
       setButtonsDisabled(false); // Re-enable buttons for the next question
       setStartTime(null); // Reset start time for the next question
@@ -119,26 +112,27 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: '1rem' }}>
-      {showIdentifier ? (
-        <Typography variant='h4'>{fixedCurrentQuestion.identifier}</Typography>
-      ) : (
+      <Box>
+        {!buttonsDisabled && (
+          <Typography variant='h4' align='center'>
+            {fixedCurrentQuestion.identifier}
+          </Typography>
+        )}
         <Box>
-          <Box>
-            {!buttonsDisabled &&
-              fixedCurrentQuestion.distractors.map((option) => (
-                <Button
-                  key={option}
-                  variant='contained'
-                  color='secondary'
-                  onClick={() => handleDistractorClick(option)}
-                  sx={{ m: 1, textTransform: 'none' }}
-                >
-                  {option}
-                </Button>
-              ))}
-          </Box>
+          {!buttonsDisabled &&
+            fixedCurrentQuestion.distractors.map((option) => (
+              <Button
+                key={option}
+                variant='contained'
+                color='secondary'
+                onClick={() => handleDistractorClick(option)}
+                sx={{ m: 1, textTransform: 'none' }}
+              >
+                {option}
+              </Button>
+            ))}
         </Box>
-      )}
+      </Box>
     </Box>
   );
 };

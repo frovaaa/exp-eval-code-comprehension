@@ -17,10 +17,13 @@ export default function PracticePage() {
 
   return (
     <Container maxWidth='md' sx={{ mt: '2rem' }}>
-      <Typography variant='h4' sx={{ textAlign: 'center', mb: '2rem' }}>
+      <Typography variant='h3' sx={{ textAlign: 'center', mb: '2rem' }}>
         Practice Round
       </Typography>
       <Divider />
+      <Typography variant='body1' sx={{ mt: '2rem', mb: '2rem' }}>
+        Please select the card with the answer that matches the code snippet
+      </Typography>
       <CodeCell questions={codeCellQuestions} practice={true} />
     </Container>
   );

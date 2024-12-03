@@ -76,7 +76,7 @@ const ExperimentLanding = () => {
           sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
         >
           <ListChecks size={24} />
-          Experiment Process
+          Process
         </Typography>
         <Box sx={{ mt: 4, display: 'grid', gap: 3 }}>
           {[
@@ -90,13 +90,14 @@ const ExperimentLanding = () => {
             {
               step: '2. Practice Round',
               description:
-                'Get familiar with the task format through 2-3 practice questions',
+                'Get familiar with the task format through 2-3 practice questions. You will be shown a code snippet and asked to select the card that matches it',
               duration: '~30 seconds',
               borderColor: 'green',
             },
             {
               step: '3. Main Experiment',
-              description: 'Complete a series of identifier recognition tasks.',
+              description:
+                'Complete a series of identifier recognition tasks like the ones you saw in the practice round',
               duration: '~3-4 minutes',
               borderColor: 'purple',
             },
@@ -116,27 +117,6 @@ const ExperimentLanding = () => {
           ))}
         </Box>
       </Box>
-
-      {/* Important Notes */}
-      <Card sx={{ mt: 6, bgcolor: 'grey.100' }}>
-        <CardContent>
-          <Typography variant='h5' sx={{ mb: 2 }}>
-            Important Information
-          </Typography>
-          <Box>
-            {[
-              'Total experiment duration: 5-6 minutes',
-              'No preparation needed',
-              'No background knowledge required',
-              'Please complete the experiment in one sitting',
-            ].map((note, index) => (
-              <Typography key={index} sx={{ mb: 1 }}>
-                ✓ {note}
-              </Typography>
-            ))}
-          </Box>
-        </CardContent>
-      </Card>
 
       {/* Start Button */}
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>

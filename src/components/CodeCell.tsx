@@ -68,9 +68,14 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
       const csBackground = sessionStorage.getItem(
         'code-comprehension-csBackground'
       );
+      const yearsOfExperience = sessionStorage.getItem(
+        'code-comprehension-yearsOfExperience'
+      );
+
       const demographics: demographics = {
         age: age ? parseInt(age) : 0,
         csBackground: csBackground === 'yes',
+        yearsOfExperience: yearsOfExperience ? parseInt(yearsOfExperience) : 0,
       };
 
       saveResultsToDatabase(results, demographics);

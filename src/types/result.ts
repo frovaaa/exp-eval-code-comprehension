@@ -7,4 +7,5 @@ export type result = {
 export type demographics = {
   age: number;
   csBackground: boolean;
+  yearsOfExperience?: number;
 };

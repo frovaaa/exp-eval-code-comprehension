@@ -25,6 +25,10 @@ export default function Home() {
     // Save the data in session storage
     sessionStorage.setItem('code-comprehension-age', age);
     sessionStorage.setItem('code-comprehension-csBackground', csBackground);
+    sessionStorage.setItem(
+      'code-comprehension-yearsOfExperience',
+      yearsOfExperience
+    );
     // Navigate to the /practice page
     router.push('/practice');
   };

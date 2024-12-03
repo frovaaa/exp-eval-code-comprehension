@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardContent, Typography, Box, Button } from '@mui/material';
 import Link from 'next/link';
 import { ListChecks } from 'lucide-react';
@@ -20,7 +19,7 @@ const ExperimentLanding = () => {
       <Card>
         <CardContent>
           <Typography variant='body1' gutterBottom>
-            Welcome to our research study! Wee investigating how developers
+            Welcome to our research study! We are investigating how developers
             recognize and recall different identifier naming conventions. You
             will be comparing two common styles:
           </Typography>
@@ -97,7 +96,7 @@ const ExperimentLanding = () => {
             },
             {
               step: '3. Main Experiment',
-              description: 'Complete a series of identifier recognition tasks',
+              description: 'Complete a series of identifier recognition tasks.',
               duration: '~3-4 minutes',
               borderColor: 'purple',
             },

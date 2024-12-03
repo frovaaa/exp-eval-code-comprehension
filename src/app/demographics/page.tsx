@@ -79,7 +79,7 @@ export default function Home() {
           {csBackground === 'yes' && (
             <TextField
               id='years-of-experience'
-              label='How many years of programming background do you have?'
+              label='Years of programming experience'
               variant='outlined'
               type='number'
               color='secondary'

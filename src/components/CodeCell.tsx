@@ -118,7 +118,19 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
             {fixedCurrentQuestion.identifier}
           </Typography>
         )}
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            flexDirection: 'row',
+            '& > *': {
+              width: 'calc(50% - 8px)', // 2 buttons per row with some margin
+              margin: '2px',
+            },
+            flexWrap: 'wrap',
+            mt: '1rem',
+          }}
+        >
           {!buttonsDisabled &&
             fixedCurrentQuestion.distractors.map((option) => (
               <Button
@@ -126,7 +138,12 @@ export const CodeCell = ({ questions, practice = false }: CodeCellProps) => {
                 variant='contained'
                 color='secondary'
                 onClick={() => handleDistractorClick(option)}
-                sx={{ m: 1, textTransform: 'none' }}
+                sx={{
+                  m: 1,
+                  textTransform: 'none',
+                  margin: '0.2rem',
+                  padding: '0.7rem',
+                }}
               >
                 {option}
               </Button>

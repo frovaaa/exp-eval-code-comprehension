@@ -1,75 +1,154 @@
-import { Box, Button, Container, Typography } from '@mui/material';
+import React from 'react';
+import { Card, CardContent, Typography, Box, Button } from '@mui/material';
 import Link from 'next/link';
+import { ListChecks } from 'lucide-react';
 
-export default function Home() {
+const ExperimentLanding = () => {
   return (
-    <Container maxWidth='sm' sx={{ mt: '2rem' }}>
-      <Typography variant='h4' sx={{ textAlign: 'center' }}>
-        camelCase vs kebab-case
-      </Typography>
-      <Typography variant='body1' sx={{ mt: '1rem', textAlign: 'justify' }}>
-        Welcome! In this task, you will test your ability to recognize and
-        recall identifiers written in either <strong>camelCase</strong> (e.g.,{' '}
-        <code>myIdentifierName</code>) or <strong>kebab-case</strong> (e.g.,{' '}
-        <code>my-identifier-name</code>). <br />
-        Below are the full instructions:
-      </Typography>
+    <Box sx={{ maxWidth: 'lg', mx: 'auto', p: 3, gap: 8 }}>
+      {/* Header Section */}
+      <Box textAlign='center' sx={{ mb: 4 }}>
+        <Typography variant='h3' component='h1' fontWeight='bold'>
+          Identifier Style Recognition Study
+        </Typography>
+        <Typography variant='h5' color='text.secondary'>
+          camelCase vs kebab-case
+        </Typography>
+      </Box>
 
-      <Typography variant='h6' sx={{ mt: '0.5rem' }}>
-        Instructions:
-      </Typography>
-      <Box sx={{ mt: '0.5rem', textAlign: 'justify' }}>
-        <Typography variant='body1'>
-          1. <strong>Demographic Questionnaire</strong>: You will start by
-          answering a few simple demographic questions. This step helps us
-          analyze results based on user background.
-        </Typography>
-        <Typography variant='body1'>
-          2. <strong>Practice Round</strong>: After the questionnaire, you will
-          complete a practice round. This will help you get familiar with the
-          task format.
-        </Typography>
-        <Typography variant='body1'>
-          3. <strong>Main Test</strong>: During the main test:
-        </Typography>
-        <Box component='ul' sx={{ mt: '0.5rem', textAlign: 'justify', pl: 2 }}>
-          <Box component='li'>
-            <Typography variant='body1'>
-              You will see an identifier displayed on the screen for a few
-              seconds. Memorize it.
-            </Typography>
+      {/* Introduction Card */}
+      <Card>
+        <CardContent>
+          <Typography variant='body1' gutterBottom>
+            Welcome to our research study! Wee investigating how developers
+            recognize and recall different identifier naming conventions. You
+            will be comparing two common styles:
+          </Typography>
+          <Box
+            sx={{
+              mt: 2,
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
+              gap: 2,
+            }}
+          >
+            <Box sx={{ p: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
+              <Typography variant='h6' fontFamily='monospace' fontWeight='bold'>
+                camelCase
+              </Typography>
+              <Typography color='text.secondary'>
+                Example:{' '}
+                <code
+                  style={{
+                    backgroundColor: '#f3f3f3',
+                    padding: '2px 4px',
+                    borderRadius: '4px',
+                  }}
+                >
+                  myIdentifierName
+                </code>
+              </Typography>
+            </Box>
+            <Box sx={{ p: 2, bgcolor: 'grey.100', borderRadius: 2 }}>
+              <Typography variant='h6' fontFamily='monospace' fontWeight='bold'>
+                kebab-case
+              </Typography>
+              <Typography color='text.secondary'>
+                Example:{' '}
+                <code
+                  style={{
+                    backgroundColor: '#f3f3f3',
+                    padding: '2px 4px',
+                    borderRadius: '4px',
+                  }}
+                >
+                  my-identifier-name
+                </code>
+              </Typography>
+            </Box>
           </Box>
-          <Box component='li'>
-            <Typography variant='body1'>
-              The identifier will then disappear, and you will be shown four
-              options: one correct identifier and three distractors. Your goal
-              is to select the correct identifier.
-            </Typography>
-          </Box>
-          <Box component='li'>
-            <Typography variant='body1'>
-              After selecting an option, a brief 1-2 second pause will follow
-              before the next question appears.
-            </Typography>
-          </Box>
+        </CardContent>
+      </Card>
+
+      {/* Process Steps */}
+      <Box sx={{ mt: 6 }}>
+        <Typography
+          variant='h4'
+          sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+        >
+          <ListChecks size={24} />
+          Experiment Process
+        </Typography>
+        <Box sx={{ mt: 4, display: 'grid', gap: 3 }}>
+          {[
+            {
+              step: '1. Demographics Survey',
+              description:
+                'Brief questionnaire about your programming background and experience',
+              duration: '~1 minute',
+              borderColor: 'blue',
+            },
+            {
+              step: '2. Practice Round',
+              description:
+                'Get familiar with the task format through 2-3 practice questions',
+              duration: '~30 seconds',
+              borderColor: 'green',
+            },
+            {
+              step: '3. Main Experiment',
+              description: 'Complete a series of identifier recognition tasks',
+              duration: '~3-4 minutes',
+              borderColor: 'purple',
+            },
+          ].map((item, index) => (
+            <Box
+              key={index}
+              sx={{ pl: 2, borderLeft: `4px solid ${item.borderColor}.500` }}
+            >
+              <Typography variant='h6' fontWeight='bold'>
+                {item.step}
+              </Typography>
+              <Typography color='text.secondary'>{item.description}</Typography>
+              <Typography variant='body2' color='text.disabled' sx={{ mt: 1 }}>
+                Duration: {item.duration}
+              </Typography>
+            </Box>
+          ))}
         </Box>
       </Box>
 
-      <Typography variant='h6' sx={{ mt: '1.5rem' }}>
-        Estimated Duration:
-      </Typography>
-      <Typography variant='body1' sx={{ mt: '0.5rem', textAlign: 'justify' }}>
-        The entire experiment, including the questionnaire, practice round, and
-        main test, will take approximately <strong>2 minutes</strong>.
-      </Typography>
+      {/* Important Notes */}
+      <Card sx={{ mt: 6, bgcolor: 'grey.100' }}>
+        <CardContent>
+          <Typography variant='h5' sx={{ mb: 2 }}>
+            Important Information
+          </Typography>
+          <Box>
+            {[
+              'Total experiment duration: 5-6 minutes',
+              'No preparation needed',
+              'No background knowledge required',
+              'Please complete the experiment in one sitting',
+            ].map((note, index) => (
+              <Typography key={index} sx={{ mb: 1 }}>
+                ✓ {note}
+              </Typography>
+            ))}
+          </Box>
+        </CardContent>
+      </Card>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: '2rem' }}>
+      {/* Start Button */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
         <Link href='/demographics' passHref>
-          <Button variant='outlined' color='secondary' size='large'>
+          <Button variant='contained' color='secondary' size='large'>
             Let&apos;s begin!
           </Button>
         </Link>
       </Box>
-    </Container>
+    </Box>
   );
-}
+};
+
+export default ExperimentLanding;

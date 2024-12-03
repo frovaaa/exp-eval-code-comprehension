@@ -18,6 +18,7 @@ export default function Home() {
   const router = useRouter();
   const [age, setAge] = useState('');
   const [csBackground, setCsBackground] = useState('');
+  const [yearsOfExperience, setYearsOfExperience] = useState('');
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -51,7 +52,7 @@ export default function Home() {
             onChange={(e) => setAge(e.target.value)}
           />
           <Typography variant='body1' sx={{ mt: '1rem' }}>
-            Do you have a computer science background?
+            Do you have any programming background?
           </Typography>
           <RadioGroup
             aria-label='cs-background'
@@ -71,6 +72,19 @@ export default function Home() {
               label='No'
             />
           </RadioGroup>
+          {csBackground === 'yes' && (
+            <TextField
+              id='years-of-experience'
+              label='How many years of programming background do you have?'
+              variant='outlined'
+              type='number'
+              color='secondary'
+              fullWidth
+              sx={{ mt: '1rem' }}
+              value={yearsOfExperience}
+              onChange={(e) => setYearsOfExperience(e.target.value)}
+            />
+          )}
           <Button
             variant='outlined'
             color='secondary'
